@@ -1,16 +1,22 @@
 import protectedRoutes from "./routes/privateRoute";
 import { PrivateRouteMiddleWare } from "./routes/PrivateRouteMiddleWare";
 
-import { Switch,BrowserRouter } from "react-router-dom";
+import { Routes,BrowserRouter, Route } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
 function App() {
   return (
     
+    <Layout >
     <BrowserRouter >
-    <Switch>
+    <Routes>
+
     {protectedRoutes.map((item, i) => (
-      <PrivateRouteMiddleWare key={i} {...item} />
-    ))}
-  </Switch></BrowserRouter>
+      <Route key={i} path={item.path}  element={<item.element />} />
+      ))
+    
+    }
+  </Routes></BrowserRouter>
+  </Layout>
    );
 }
 
